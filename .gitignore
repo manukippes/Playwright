@@ -16,5 +16,6 @@
 *.swo
 
 # Ignorar archivos de prueba
-/tests-examples/
-/test-results/
+tests-examples/
+test-results/
+playwright-report/
