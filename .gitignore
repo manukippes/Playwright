@@ -14,3 +14,7 @@
 # Ignorar archivos temporales de editores
 *.swp
 *.swo
+
+# Ignorar archivos de prueba
+/tests-examples/
+/test-results/
