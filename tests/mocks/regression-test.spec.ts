@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test.afterAll(async ({ page }) => {
-  page.close();
+test.afterEach(async ({ page }) => {
+  await page.close();
 })
 
 test.describe('Mocking Strategy Test', () => {

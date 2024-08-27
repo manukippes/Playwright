@@ -6,7 +6,7 @@ let apiContext;
 
 test.describe('Github API Test', () => {
 
-    test.beforeAll(async ({ playwright }) => {
+    test.beforeEach(async ({ playwright }) => {
         apiContext = await playwright.request.newContext({
             baseURL: 'https://api.github.com',
             extraHTTPHeaders: {
@@ -16,7 +16,7 @@ test.describe('Github API Test', () => {
         })
     })
 
-    test.afterAll(async ({ request, page }) => {
+    test.afterEach(async ({ request, page }) => {
         await apiContext.dispose();
         await page.close();
     })

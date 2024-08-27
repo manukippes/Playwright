@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 import { LandingPage } from '../../pages/kimatesting/LandingPage';
 
-test.afterAll(async ({ page }) => {
-  page.close();
-})
 
+test.afterEach(async ({ page }) => {
+  await page.close();
+})
 
 test.describe('Check available KIMA Testing page', () => {
   
