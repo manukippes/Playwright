@@ -16,8 +16,9 @@ test.describe('Github API Test', () => {
         })
     })
 
-    test.afterAll(async ({ request }) => {
+    test.afterAll(async ({ request, page }) => {
         await apiContext.dispose();
+        await page.close();
     })
 
     test('Verify Github API', async ({ page }) => {
