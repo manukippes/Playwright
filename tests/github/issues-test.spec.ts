@@ -1,14 +1,14 @@
 import test, { expect } from "@playwright/test";
 
-const REPO = 'KIMATestingFake';
-const USER = 'manukippes';
+const REPO = process.env.GITHUB_REPO;
+const USER = process.env.GITHUB_USER;
 let apiContext;
 
 test.describe('Github API Test', () => {
 
     test.beforeEach(async ({ playwright }) => {
         apiContext = await playwright.request.newContext({
-            baseURL: 'https://api.github.com',
+            baseURL: process.env.GITHUB_API_BASE_URL,
             extraHTTPHeaders: {
                 'Accept': 'application/vnd.github.v3+json',
                 'Authorization': `token ${process.env.GITHUB_TOKEN}`,

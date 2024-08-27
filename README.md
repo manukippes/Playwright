@@ -9,6 +9,8 @@ This repository contains a set of end-to-end tests for various web applications 
   - [Installation](#installation)
   - [Project Structure](#project-structure)
   - [What You Can Do in `playwright.config.ts`](#what-you-can-do-in-playwrightconfigts)
+  - [Environment Variables](#environment-variables)
+    - [Setting Up Environment Variables](#setting-up-environment-variables)
   - [Usage](#usage)
   - [Configuration](#configuration)
   - [Contributing](#contributing)
@@ -116,6 +118,27 @@ The `playwright.config.ts` file is the central place to configure how Playwright
 
 These are just a few examples of what you can configure in `playwright.config.ts`. This file allows you to tailor the testing environment to fit your exact needs, making it a powerful tool in your testing suite.
 
+## Environment Variables
+
+This project uses environment variables to manage configuration for different environments (e.g., `qa`, `dev`). These variables are loaded from `.env` files based on the `NODE_ENV` value.
+
+### Setting Up Environment Variables
+
+1. **Create a `.env` file:**
+
+   You need to create a `.env` file for the environment you are working on. For example, for the QA environment, create a file named `.env.qa`.
+
+2. **Add the necessary variables:**
+
+   Copy the following template into your `.env.qa` file and adjust the values accordingly:
+
+   ```plaintext
+   GITHUB_REPO='XXXXXXXX'
+   GITHUB_USER='XXXXXXXX'
+   BASE_URL='https://www.kimatesting.com'
+   GITHUB_API_BASE_URL='https://api.github.com'
+   MOCK_BASE_URL='https://demo.playwright.dev/api-mocking'
+
 ## Usage
 
 To run the tests, you can use the following commands:
@@ -136,6 +159,10 @@ To run the tests, you can use the following commands:
     ```bash
     npx playwright test tests/smoke-test.spec.ts -g “Check available Contact button”
      ```
+- **Run setting the NODE_ENV**
+    ```bash
+    NODE_ENV=qa npx playwright test 
+    ```  
 
 ## Configuration
 

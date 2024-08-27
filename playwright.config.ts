@@ -4,8 +4,9 @@ import { defineConfig, devices } from '@playwright/test';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV || 'qa'}`
+});
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -25,10 +26,11 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.kimatesting.com/',
+    baseURL: `${process.env.BASE_URL}`,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
     video: 'retain-on-failure'
   },
 
