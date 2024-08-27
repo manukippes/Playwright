@@ -55,6 +55,11 @@ export default defineConfig({
       testMatch: 'github/**/*',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'mocks',
+      testMatch: 'mocks/**/*',
+      use: { ...devices['Desktop Chrome'] },
+    },
 
     // {
     //   name: 'firefox',
