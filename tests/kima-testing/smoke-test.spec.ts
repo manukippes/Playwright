@@ -60,10 +60,10 @@ test.describe('Check available Sections', () => {
       await landingPage.clickOnContactButton();
     })
     await test.step('Then The contact page is showed', async () => {
-      await expect(landingPage.contactSectionTitle, 'Contact section title is not present.').toBeVisible();
-      await expect(landingPage.contactSectionEmail, 'Contact section email is not present.').toBeVisible();
-      await expect(landingPage.contactSectionPhone, 'Contact section phone is not present.').toBeVisible();
-      await expect(landingPage.contactSectionSendButton, 'Contact section button is not present.').toBeVisible();
+      await expect(landingPage.getContactSectionTitle(), 'Contact section title is not present.').toBeVisible();
+      await expect(landingPage.getContactSectionEmail(), 'Contact section email is not present.').toBeVisible();
+      await expect(landingPage.getContactSectionPhone(), 'Contact section phone is not present.').toBeVisible();
+      await expect(landingPage.getContactSectionSendButton(), 'Contact section button is not present.').toBeVisible();
     })
     
   })
