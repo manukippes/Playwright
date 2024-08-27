@@ -11,7 +11,7 @@ test.describe('Mocking Strategy Test', () => {
       await route.fulfill({ json });
     });
 
-    await page.goto('https://demo.playwright.dev/api-mocking');
+    await page.goto(`${process.env.MOCK_BASE_URL}`);
 
     await expect(page.getByText('Avocado'), 'Avocado item is not present.').toBeVisible();
     
@@ -25,7 +25,7 @@ test.describe('Mocking Strategy Test', () => {
         await route.fulfill({ json });
       });
   
-      await page.goto('https://demo.playwright.dev/api-mocking');
+      await page.goto(`${process.env.MOCK_BASE_URL}`);
   
       await expect(page.getByText('Avocado'), 'Avocado item is not present.').toBeVisible();
       

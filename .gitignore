@@ -19,3 +19,6 @@
 tests/examples/
 test-results/
 playwright-report/
+
+#env files
+.env.*
