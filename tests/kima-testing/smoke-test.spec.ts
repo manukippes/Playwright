@@ -14,7 +14,7 @@ test.describe('Check available KIMA Testing page', () => {
     })
 
     await test.step(`Then KIMA Testing title is displayed`, async () => {
-      await expect(page).toHaveTitle('KIMA Testing');
+      await expect(page, 'KIMA Testing title is invalid.').toHaveTitle('KIMA Testing');
     })
   });
 });
@@ -44,8 +44,8 @@ test.describe('Check available Sections', () => {
       })
 
       await test.step(`Then section ${section.name} is available`, async () => {
-        await expect(page).toHaveURL(new RegExp(`.*${section.url}.*`));
-        await expect(page).toHaveTitle('KIMA Testing');
+        await expect(page, 'URL section is invalid.').toHaveURL(new RegExp(`.*${section.url}.*`));
+        await expect(page, 'Page title is invalid.').toHaveTitle('KIMA Testing');
       })
     });
   }
@@ -60,10 +60,10 @@ test.describe('Check available Sections', () => {
       await landingPage.clickOnContactButton();
     })
     await test.step('Then The contact page is showed', async () => {
-      await expect(landingPage.contactSectionTitle).toBeVisible();
-      await expect(landingPage.contactSectionEmail).toBeVisible();
-      await expect(landingPage.contactSectionPhone).toBeVisible();
-      await expect(landingPage.contactSectionSendButton).toBeVisible();
+      await expect(landingPage.contactSectionTitle, 'Contact section title is not present.').toBeVisible();
+      await expect(landingPage.contactSectionEmail, 'Contact section email is not present.').toBeVisible();
+      await expect(landingPage.contactSectionPhone, 'Contact section phone is not present.').toBeVisible();
+      await expect(landingPage.contactSectionSendButton, 'Contact section button is not present.').toBeVisible();
     })
     
   })

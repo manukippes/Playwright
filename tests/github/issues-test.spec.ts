@@ -28,11 +28,11 @@ test.describe('Github API Test', () => {
                 title: issueTitle,
             }
         });
-        expect(newIssue.ok()).toBeTruthy();
+        expect(newIssue.ok(), 'Issue was not created.').toBeTruthy();
         await page.goto(`https://github.com/${USER}/${REPO}/issues`);
         const firstIssue = page.locator(`a[data-hovercard-type='issue']`).first();
         
-        await expect(firstIssue).toHaveText(issueTitle);
+        await expect(firstIssue, 'Issue has not a valid title.').toHaveText(issueTitle);
     })
     
     
