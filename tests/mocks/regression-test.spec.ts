@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-test.afterAll(async ({ page }) => {
-  page.close();
+test.afterEach(async ({ page }) => {
+  await page.close();
 })
 
 test.describe('Mocking Strategy Test', () => {
@@ -13,7 +13,7 @@ test.describe('Mocking Strategy Test', () => {
 
     await page.goto('https://demo.playwright.dev/api-mocking');
 
-    await expect(page.getByText('Avocado')).toBeVisible();
+    await expect(page.getByText('Avocado'), 'Avocado item is not present.').toBeVisible();
     
   });
 
@@ -27,7 +27,7 @@ test.describe('Mocking Strategy Test', () => {
   
       await page.goto('https://demo.playwright.dev/api-mocking');
   
-      await expect(page.getByText('Avocado')).toBeVisible();
+      await expect(page.getByText('Avocado'), 'Avocado item is not present.').toBeVisible();
       
     });
 });

@@ -6,7 +6,7 @@ let apiContext;
 
 test.describe('Github API Test', () => {
 
-    test.beforeAll(async ({ playwright }) => {
+    test.beforeEach(async ({ playwright }) => {
         apiContext = await playwright.request.newContext({
             baseURL: 'https://api.github.com',
             extraHTTPHeaders: {
@@ -16,7 +16,7 @@ test.describe('Github API Test', () => {
         })
     })
 
-    test.afterAll(async ({ request, page }) => {
+    test.afterEach(async ({ request, page }) => {
         await apiContext.dispose();
         await page.close();
     })
@@ -28,11 +28,11 @@ test.describe('Github API Test', () => {
                 title: issueTitle,
             }
         });
-        expect(newIssue.ok()).toBeTruthy();
+        expect(newIssue.ok(), 'Issue was not created.').toBeTruthy();
         await page.goto(`https://github.com/${USER}/${REPO}/issues`);
         const firstIssue = page.locator(`a[data-hovercard-type='issue']`).first();
         
-        await expect(firstIssue).toHaveText(issueTitle);
+        await expect(firstIssue, 'Issue has not a valid title.').toHaveText(issueTitle);
     })
     
     
