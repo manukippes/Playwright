@@ -23,13 +23,13 @@ test.describe('Github API Test', () => {
 
     test('Verify Github API', async ({ page }) => {
         let issueTitle = '[TEST] We are going to create a new issue'
-        const newIssue = await apiContext.post(`/repos/${USER}/${REPO}/issues`, {
+        const newIssue = await apiContext.post(`/repos/manukippes/KIMATestingFake-DEPRECATED-/issues`, {
             data: {
                 title: issueTitle,
             }
         });
         expect(newIssue.ok(), 'Issue was not created.').toBeTruthy();
-        await page.goto(`https://github.com/${USER}/${REPO}/issues`);
+        await page.goto(`https://github.com/manukippes/KIMATestingFake-DEPRECATED-/issues`);
         const firstIssue = page.locator(`a[data-hovercard-type='issue']`).first();
         
         await expect(firstIssue, 'Issue has not a valid title.').toHaveText(issueTitle);
