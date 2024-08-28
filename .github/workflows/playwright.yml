@@ -1,7 +1,7 @@
 name: Playwright Tests
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   GITHUB_REPO: ${{ secrets._GITHUB_REPO }}
@@ -9,40 +9,41 @@ env:
   BASE_URL: ${{ secrets._BASE_URL }}
   GITHUB_API_BASE_URL: ${{ secrets._GITHUB_API_BASE_URL }}
   MOCK_BASE_URL: ${{ secrets._MOCK_BASE_URL }}
+  GITHUB_TOKEN: ${{ secrets._GITHUB_TOKEN }}
 
 jobs:
   regression-test:
-    environment: qa  # Especifica el entorno aquí
+    environment: qa # Especifica el entorno aquí
     timeout-minutes: 60 # Timeout de nuestros tests
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4 # Se hace checkout de nuestro código
-    
-    # Cache de npm para Node.js
-    - name: Cache Node.js modules
-      uses: actions/cache@v4
-      with:
-        path: ~/.npm  # Ruta al cache de npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    
-    - uses: actions/setup-node@v4 # Se instala Node
-      with:
-        node-version: 22.6
+      - uses: actions/checkout@v4 # Se hace checkout de nuestro código
 
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      # Cache de npm para Node.js
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm # Ruta al cache de npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-    - name: Run Playwright tests
-      run: npx playwright test
+      - uses: actions/setup-node@v4 # Se instala Node
+        with:
+          node-version: 22.6
 
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
