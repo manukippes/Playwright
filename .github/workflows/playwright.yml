@@ -10,6 +10,7 @@ env:
   MOCK_BASE_URL: ${{ secrets._MOCK_BASE_URL }}
 jobs:
   test:
+    environment: qa
     timeout-minutes: 60 # Timeout de nuestros tests
     runs-on: ubuntu-latest
     steps:
