@@ -9,7 +9,7 @@ env:
   GITHUB_API_BASE_URL: ${{ secrets._GITHUB_API_BASE_URL }}
   MOCK_BASE_URL: ${{ secrets._MOCK_BASE_URL }}
 jobs:
-  test:
+  regression-test:
     environment: qa
     timeout-minutes: 60 # Timeout de nuestros tests
     runs-on: ubuntu-latest
