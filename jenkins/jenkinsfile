@@ -1,16 +1,23 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright:v1.46.0-jammy' } }
-   stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'npm ci'
-            sh 'npx playwright test'
-         }
-      }
-   }
-   
-   post{
-       always{
+    agent { docker { image 'mcr.microsoft.com/playwright:v1.46.0-jammy' } }
+    environment {
+        BASE_URL = credentials('base-url')
+        MOCK_BASE_URL = credentials('mock-base-url')
+        GITHUB_API_BASE_URL = credentials('github-api-base-url')
+        GITHUB_TOKEN = credentials('github-token')
+        GITHUB_REPO = credentials('github-repo')
+        GITHUB_USER = credentials('github-user')
+    }
+    stages {
+        stage('e2e-tests') {
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright test'
+            }
+        }
+    }
+    post{
+        always{
             publishHTML([
                             reportName : 'Playwright Report',
                             reportDir: 'playwright-report',
@@ -19,6 +26,6 @@ pipeline {
                             alwaysLinkToLastBuild: true,
                             allowMissing: false
                         ])
-    }
+        }
     } 
 }
