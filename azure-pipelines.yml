@@ -2,6 +2,9 @@ trigger:
 - main
 
 pool:
+  name: Azure pipelines
+  demands:
+    - agent.name -equals Azure pipelines
   vmImage: ubuntu-latest
 container: mcr.microsoft.com/playwright:v1.46.1-jammy
 
